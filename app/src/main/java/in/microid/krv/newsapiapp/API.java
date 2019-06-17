@@ -12,7 +12,7 @@ public class API {
     private RequestQueue queue = null;
     private Context context = null;
 
-    public API(Context c) {
+    API(Context c) {
         context = c;
         queue = Volley.newRequestQueue(c);
     }
@@ -21,7 +21,7 @@ public class API {
         sendRequest("country=in", success, error);
     }
 
-    public void sendRequest(String query, Response.Listener<JSONObject> success, Response.ErrorListener error) {
+    private void sendRequest(String query, Response.Listener<JSONObject> success, Response.ErrorListener error) {
         String url = context.getResources().getString(R.string.api_url)
                 + "apiKey=" + context.getResources().getString(R.string.api_token)
                 + "&" + query;
