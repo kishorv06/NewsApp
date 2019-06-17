@@ -1,23 +1,21 @@
 package in.microid.krv.newsapiapp;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerViewAdapter.CustomViewHolder> {
     private JSONArray feedItemList;
-    private Context mContext;
 
-    NewsRecyclerViewAdapter(Context context, JSONArray feedItemList) {
+    NewsRecyclerViewAdapter(JSONArray feedItemList) {
         this.feedItemList = feedItemList;
-        this.mContext = context;
     }
 
     @Override
@@ -34,6 +32,10 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
             customViewHolder.heading.setText(feedItem.getString("title"));
             customViewHolder.description.setText(feedItem.getString("description"));
             customViewHolder.source.setText(feedItem.getJSONObject("source").getString("name"));
+            if (feedItem.getString("urlToImage") != null)
+                Picasso.get()
+                        .load(feedItem.getString("urlToImage"))
+                        .into(customViewHolder.image);
         } catch (JSONException e) {
             e.printStackTrace();
         }
