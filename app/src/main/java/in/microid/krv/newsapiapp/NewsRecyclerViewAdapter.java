@@ -34,12 +34,19 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
         try {
             JSONObject feedItem = feedItemList.getJSONObject(i);
             customViewHolder.heading.setText(feedItem.getString("title"));
-            customViewHolder.description.setText(feedItem.getString("description"));
+            if (!feedItem.getString("description").equals("null"))
+                customViewHolder.description.setText(feedItem.getString("description"));
+            else
+                customViewHolder.description.setText("");
             customViewHolder.source.setText(feedItem.getJSONObject("source").getString("name"));
-            if (feedItem.getString("urlToImage") != null)
+            if (!feedItem.getString("urlToImage").equals("null")) {
                 Picasso.get()
                         .load(feedItem.getString("urlToImage"))
                         .into(customViewHolder.image);
+                customViewHolder.image.setVisibility(View.VISIBLE);
+            } else {
+                customViewHolder.image.setVisibility(View.GONE);
+            }
             customViewHolder.time.setText(getTimeAgo(feedItem.getString("publishedAt")));
         } catch (JSONException e) {
             e.printStackTrace();
