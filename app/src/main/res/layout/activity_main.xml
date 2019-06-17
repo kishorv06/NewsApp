@@ -6,6 +6,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".Main">
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/feed_search" android:drawableStart="@drawable/ic_search_black_24dp"
+            android:drawablePadding="8dp" android:padding="8dp" android:background="@drawable/search_bg"
+            android:hint="Search for News" android:layout_marginLeft="16dp" android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp" android:layout_marginBottom="4dp" android:imeOptions="actionSearch"/>
     <android.support.v4.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/feeds_swipe">

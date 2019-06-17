@@ -9,7 +9,11 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -48,6 +52,34 @@ public class Main extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 refreshNews();
+            }
+        });
+        ((EditText) findViewById(R.id.feed_search)).setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    api.searchNews(v.getText().toString(), new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                if (response.getString("status").equals("ok")) {
+                                    loadNEWS(response.getJSONArray("articles"));
+                                } else {
+                                    Toast.makeText(Main.this, "No results", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (Exception e) {
+                                onError(e);
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            error.printStackTrace();
+                        }
+                    });
+                    return true;
+                }
+                return false;
             }
         });
     }

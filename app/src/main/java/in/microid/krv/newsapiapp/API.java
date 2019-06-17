@@ -21,6 +21,10 @@ class API {
         sendRequest("country=in", success, error);
     }
 
+    void searchNews(String query, Response.Listener<JSONObject> success, Response.ErrorListener error) {
+        sendRequest("q=" + query, success, error);
+    }
+
     private void sendRequest(String query, Response.Listener<JSONObject> success, Response.ErrorListener error) {
         String url = context.getResources().getString(R.string.api_url)
                 + "apiKey=" + context.getResources().getString(R.string.api_token)
