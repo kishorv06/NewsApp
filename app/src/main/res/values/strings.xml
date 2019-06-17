@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">News Api App</string>
+    <string name="api_url">https://newsapi.org/v2/top-headlines?</string>
+    <string name="api_token">ashdabjhdvajkshdvfkahrvwu</string>
 </resources>
