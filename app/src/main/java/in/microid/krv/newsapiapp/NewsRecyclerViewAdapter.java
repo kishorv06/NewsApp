@@ -1,5 +1,6 @@
 package in.microid.krv.newsapiapp;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
     public void onBindViewHolder(CustomViewHolder customViewHolder, int i) {
 
         try {
-            JSONObject feedItem = feedItemList.getJSONObject(i);
+            final JSONObject feedItem = feedItemList.getJSONObject(i);
             customViewHolder.heading.setText(feedItem.getString("title"));
             if (!feedItem.getString("description").equals("null"))
                 customViewHolder.description.setText(feedItem.getString("description"));
@@ -48,6 +49,14 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
                 customViewHolder.image.setVisibility(View.GONE);
             }
             customViewHolder.time.setText(getTimeAgo(feedItem.getString("publishedAt")));
+            customViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(v.getContext(), News.class);
+                    i.putExtra("data", feedItem.toString());
+                    v.getContext().startActivity(i);
+                }
+            });
         } catch (JSONException e) {
             e.printStackTrace();
         }
