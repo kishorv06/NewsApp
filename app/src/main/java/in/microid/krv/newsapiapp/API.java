@@ -8,16 +8,16 @@ import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
 
-public class API {
-    private RequestQueue queue = null;
-    private Context context = null;
+class API {
+    private RequestQueue queue;
+    private Context context;
 
     API(Context c) {
         context = c;
         queue = Volley.newRequestQueue(c);
     }
 
-    public void getNEWS(Response.Listener<JSONObject> success, Response.ErrorListener error) {
+    void getNEWS(Response.Listener<JSONObject> success, Response.ErrorListener error) {
         sendRequest("country=in", success, error);
     }
 
