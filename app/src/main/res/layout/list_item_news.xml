@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:cardCornerRadius="10dp" app:cardUseCompatPadding="true">
+
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:contentDescription="@string/list_item_image"
+               android:id="@+id/list_item_image"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:padding="8dp" android:layout_marginTop="8dp"
+    >
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/list_item_heading"
+                android:layout_marginTop="8dp" android:textColor="#000" android:textSize="18sp"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/list_item_description"
+                android:maxLines="2" android:ellipsize="end" android:singleLine="false" android:layout_marginTop="8dp"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="16dp">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/list_item_source"
+                    android:textColor="#222" android:textSize="12sp"/>
+            <ImageView
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent" app:srcCompat="@drawable/ic_dot_black_24dp"
+                    android:layout_marginLeft="4dp" android:layout_marginRight="4dp"
+                    android:layout_marginTop="2dp" android:tint="#222"
+                    android:contentDescription="@string/list_item_seperatoe"/>
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:id="@+id/list_item_time"
+                    android:textColor="#222" android:textSize="12sp" android:layout_weight="1"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

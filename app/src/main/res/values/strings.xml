@@ -2,4 +2,7 @@
     <string name="app_name">News Api App</string>
     <string name="api_url">https://newsapi.org/v2/top-headlines?</string>
     <string name="api_token">4668f512340148bfb8c708ec05264879</string>
+
+    <string name="list_item_image">News Image</string>
+    <string name="list_item_seperatoe">Seperator</string>
 </resources>
