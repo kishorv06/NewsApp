@@ -1,6 +1,7 @@
 package in.microid.krv.newsapiapp;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,9 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerViewAdapter.CustomViewHolder> {
     private JSONArray feedItemList;
@@ -36,6 +40,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
                 Picasso.get()
                         .load(feedItem.getString("urlToImage"))
                         .into(customViewHolder.image);
+            customViewHolder.time.setText(getTimeAgo(feedItem.getString("publishedAt")));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -57,6 +62,16 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
             this.description = view.findViewById(R.id.list_item_description);
             this.source = view.findViewById(R.id.list_item_source);
             this.time = view.findViewById(R.id.list_item_time);
+        }
+    }
+
+    private String getTimeAgo(String time) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+            return DateUtils.getRelativeTimeSpanString(sdf.parse(time).getTime(), System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS).toString();
+        } catch (Exception e) {
+            return "";
         }
     }
 }
